@@ -4,6 +4,10 @@ Folder structure:
 
 ·Application: Please commit your code under this folder.
 
+        - Frontend
+        
+        - Backend
+
 ·ProjectManagement:
         
         - Meeting_minutes: Committing minutes after each meeting. e.g. Group/Client Meeting_Week3-1
