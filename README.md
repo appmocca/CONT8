@@ -9,7 +9,7 @@ Folder structure:
 
         - Frontend
         
-        - Backend test
+        - Backend 
 
 ·ProjectManagement:
         
