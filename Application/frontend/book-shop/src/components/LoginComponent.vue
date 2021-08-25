@@ -1,12 +1,20 @@
 <template>
   <div class="login_component">
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>
-      <span class="border border-0 border-dark"></span>
-    </p>
+
+    <form>
+      <div class="mb-3">
+        <label for="user_id">User ID:</label><br>
+        <input type="text" class="form-control" id="user_id" name="user_id" value=""><br>
+      </div>
+
+      <div class="mb-3">
+        <label for="password">Last name:</label><br>
+        <input type="text" class="form-control" id="password" name="password" value=""><br><br>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form> 
     
   </div>
 </template>
