@@ -9,6 +9,6 @@ PASSWORD VARCHAR(30) NOT NULL
 );
 
 --PUT MORE DATA:
-INSERT INTO USER VALUES ("abc@gmail.com","joe","chan","123");
-
-
+INSERT INTO USER VALUES ("joe123@gmail.com","kwok","chan","123");
+INSERT INTO USER VALUES ("bcd@gmail.com","mary","cheung","123");
+INSERT INTO USER VALUES ("abc@gmail.com","chan","j","123");
