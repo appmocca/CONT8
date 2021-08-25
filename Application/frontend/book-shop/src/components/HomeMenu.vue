@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-25 22:30:39
+ * @LastEditTime: 2021-08-25 23:13:46
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \bookshop\HomeMenu.vue
+-->
 <template>
   <div class="home_menu">
     <h1>{{ msg }}</h1>
