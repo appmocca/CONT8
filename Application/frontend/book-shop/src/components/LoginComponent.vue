@@ -1,31 +1,75 @@
+<!--
+ * @Author: Kwok Chung Kwan / Other developer name 
+ * @Date: 2021-08-25 22:32:28
+ * @LastEditTime: 2021-08-26 00:00:09
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \bookshop\LoginComponent.vue
+-->
 <template>
   <div class="login_component">
     <h1>{{ msg }}</h1>
-    
+
     <form>
-      <div class="mb-3">
-        <label for="user_id">User ID:</label><br>
-        <input type="text" class="form-control form-control-sm" id="user_id" name="user_id" value=""><br>
-      </div>
-
-      <div class="mb-3">
-        <label for="password">Last name:</label><br>
-        <input type="text" class="form-control form-control-sm" id="password" name="password" value=""><br><br>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Login</button>
-    </form> 
-    
+      <b-container class="bv-example-row">
+        <b-row align-h="center" class="mb-3">
+          <label for="user_id" >User ID</label><br />
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            id="user_id"
+            name="user_id"
+            value=""
+            v-model = "user_id"
+          /><br />
+        </b-row>
+        <b-row align-h="center" class="mb-3">
+          <label for="password" >Password:</label><br />
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            id="password"
+            name="password"
+            value=""
+            v-model = "password"
+          />
+        </b-row>
+        <b-row align-h="center" align = "center" class="mb-3">
+          <b-col >
+            <b-button class="mx-1 btn btn-light" type="submit" variant="primary">Sign Up</b-button>
+            <b-button class="mx-1 btn btn-dark" type="submit" variant="primary" v-on:click="get_data()">Login</b-button>
+          </b-col>
+          
+        </b-row>
+      </b-container>
+    </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'LoginComponent',
+  name: "LoginComponent",
   props: {
-    msg: String
+    msg: String,
+    user_id: String,
+    password: String
+  },
+  methods : {
+    get_data : function(){
+    const requests = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userid: this.user_id, pass: this.password} )
+    };
+    fetch("PATH", requests)
+      .then(response => response.json())
+      .then(data => {
+        // Do some work
+        console.log(data);
+      });
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -43,5 +87,9 @@ li {
 }
 a {
   color: #42b983;
+}
+.form-control {
+  width: 40%;
+  align-self: center;
 }
 </style>

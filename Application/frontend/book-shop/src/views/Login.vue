@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <img alt="Vue logo" src="../assets/User_Login_Icon.png" width="300px" height="300px">
+    <img alt="Vue logo" src="../assets/User_Login_Icon.png" width="250px" height="250px">
     <LoginComponent msg="Welcome to Book Store App"/>
   </div>
 
