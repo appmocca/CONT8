@@ -1,4 +1,4 @@
-# bookshop
+# demo-vue
 
 > A Vue.js project
 

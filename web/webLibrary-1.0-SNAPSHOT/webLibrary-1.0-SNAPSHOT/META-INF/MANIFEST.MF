@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Implementation-Title: webLibrary
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: han
+Implementation-Vendor-Id: com.cont
+Spring-Boot-Version: 2.1.4.RELEASE
+Main-Class: org.springframework.boot.loader.JarLauncher
+Start-Class: com.cont.MyApplication
+Spring-Boot-Classes: BOOT-INF/classes/
+Spring-Boot-Lib: BOOT-INF/lib/
+Created-By: Apache Maven 3.6.3
+Build-Jdk: 1.8.0_291
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/webLibrary
+
