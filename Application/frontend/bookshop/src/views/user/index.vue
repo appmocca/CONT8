@@ -100,8 +100,8 @@
           <el-input v-model="userForm.password" show-password></el-input>
         </el-form-item>
         <el-form-item label="Gender" prop="sex">
-          <el-radio v-model="userForm.sex" label="男">男</el-radio>
-          <el-radio v-model="userForm.sex" label="女">女</el-radio>
+          <el-radio v-model="userForm.sex" label="Male">Male</el-radio>
+          <el-radio v-model="userForm.sex" label="Female">Female</el-radio>
         </el-form-item>
         <el-form-item label="Email" prop="email">
           <el-input v-model="userForm.email"></el-input>
