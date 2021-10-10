@@ -16,6 +16,7 @@ pipeline {
   			echo 'Hello world 0123456789!'
         echo 'Hello world Test'
         echo 'Hello world Test'
+        echo 'Hello world Test'
   		}
   	}
   }
