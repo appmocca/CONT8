@@ -1,3 +1,13 @@
+// possible tests
+// test if node installed
+// test npm install
+// test if jdk is installed
+// test if SQLite is installed
+
+// brew services start jenkins
+// pulling from github
+// ./ngrok http 8080
+
 pipeline {
   agent any
   stages {
