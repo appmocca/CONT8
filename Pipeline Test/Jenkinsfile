@@ -6,6 +6,7 @@
 
 // brew services start jenkins
 // expose the port & pull from github
+// update github webhook & run
 // ./ngrok http 8080
 
 pipeline {
