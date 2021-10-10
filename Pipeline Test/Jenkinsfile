@@ -5,7 +5,7 @@
 // test if SQLite is installed
 
 // brew services start jenkins
-// pulling from github
+// expose the port & pull from github
 // ./ngrok http 8080
 
 pipeline {
@@ -14,6 +14,7 @@ pipeline {
   	stage('Stage 1') {
   		steps {
   			echo 'Hello world 0123456789!'
+        echo 'Hello world Test'
         echo 'Hello world Test'
   		}
   	}
