@@ -2,13 +2,13 @@
   <el-container class="home-container">
     <!--顶部-->
     <el-header style="margin-right: 15px; width: 100%">
-      <span class="nav-logo">😀</span>
-      <span class="head-title">Just A Demo</span>
-      <el-avatar
+      <span class="nav-logo"><img src="../assets/img/logo.png"></span>
+      <span class="head-title">CONT8 ONLINE BOOKSHOP</span>
+      <!-- <el-avatar
         icon="el-icon-user-solid"
         style="color: #222; float: right; padding: 20px"
         >{{ this.$store.state.user.userName }}</el-avatar
-      >
+      > -->
     </el-header>
     <!-- 主体 -->
     <el-container>
@@ -46,6 +46,7 @@ export default {
       navList: [
         { name: "/index", title: "Home", icon: "el-icon-s-home" },
         { name: "/user", title: "Users",icon:"el-icon-s-custom" },
+        { name: "/book", title: "Books",icon:"el-icon-collection" },
       ],
     };
   },
@@ -53,11 +54,11 @@ export default {
 </script>
 
 <style >
-.nav-logo {
+.nav-logo img{
   position: absolute;
+  width: 60px;
   padding-top: -1%;
   left: 5%;
-  font-size: 40px;
 }
 
 .head-title {

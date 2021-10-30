@@ -27,3 +27,4 @@ password:123456
 ### Default database: 
 
 tb_user.sql
+tb_table.sql

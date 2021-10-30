@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function userLogin(data) {
+export function bookLogin(data) {
   return request({
     url: '/login',
     method: 'post',
@@ -9,36 +9,36 @@ export function userLogin(data) {
 }
 
 //获取用户列表
-export function userList(data) {
+export function bookList(data) {
   return request({
-    url: 'user/list',
+    url: 'book/list',
     method: 'post',
     data
   })
 }
 
 //添加用户
-export function userAdd(data) {
+export function bookAdd(data) {
   return request({
-    url: 'user/add',
+    url: 'book/add',
     method: 'post',
     data
   })
 }
 
 //修改用户
-export function userUpdate(data) {
+export function bookUpdate(data) {
   return request({
-    url: 'user/update',
+    url: 'book/update',
     method: 'post',
     data
   })
 }
 
 //删除用户
-export function userDelete(id) {
+export function bookDelete(id) {
   return request({
-    url: `user/delete/${id}`,
+    url: `book/delete/${id}`,
     method: 'post',   
       id
   })
@@ -47,7 +47,7 @@ export function userDelete(id) {
 //批量删除用户
 export function userBatchDelete(data) {
   return request({
-    url: 'user/delete/batch',
+    url: 'book/delete/batch',
     method: 'post',
     data
   })

@@ -10,23 +10,23 @@
               placeholder="Input"
               v-model="queryInfo.keyword"
               clearable
-              @clear="getUserList"
+              @clear="getbookList"
             >
               <el-button
                 slot="append"
                 icon="el-icon-search"
-                @click="getUserList"
+                @click="getbookList"
               ></el-button>
             </el-input>
           </el-col>
           <el-col :span="2.5">
             <el-button type="primary" @click="addDialogVisible = true"
-              >Add user</el-button
+              >Add Book</el-button
             >
           </el-col>
           <el-col :span="2.5">
             <el-button type="danger" @click="batchDeleteUser"
-              >Delete user</el-button
+              >Delete Book</el-button
             >
           </el-col>
         </el-row>
@@ -34,18 +34,18 @@
       <el-col :span="24">
         <!--表格-->
         <el-table
-          :data="userList"
+          :data="bookList"
           border
           stripe
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
           <el-table-column prop="id" label="ID"></el-table-column>
-          <el-table-column prop="userName" label="User Name"></el-table-column>
-          <el-table-column prop="name" label="Name"></el-table-column>
+          <!-- <el-table-column prop="Name" label="User Name"></el-table-column> -->
+          <el-table-column prop="bookName" label="Name"></el-table-column>
           <!-- <el-table-column prop="sex" label="Gender"></el-table-column> -->
-          <el-table-column prop="email" label="E-Mail"></el-table-column>
-          <el-table-column prop="password" label="Password"></el-table-column>
+          <el-table-column prop="date" label="Date"></el-table-column>
+          <el-table-column prop="type" label="Type"></el-table-column>
           <!-- <el-table-column prop="address" label="Address"></el-table-column> -->
           <el-table-column label="Operation">
             <!-- 作用域插槽 -->
@@ -62,7 +62,7 @@
                 type="danger"
                 size="mini"
                 icon="el-icon-delete"
-                @click="removeUserById(scope.row.id)"
+                @click="removebookById(scope.row.id)"
               ></el-button>
             </template>
           </el-table-column>
@@ -84,57 +84,54 @@
     </el-row>
     <!--添加用户的对话框-->
     <el-dialog
-      title="Add User"
+      title="Add Book"
       :visible.sync="addDialogVisible"
       width="30%"
       @close="addDialogClosed"
     >
       <!--内容主体区域-->
-      <el-form :model="userForm" label-width="90px">
-        <el-form-item label="Login Name" prop="loginName">
-          <el-input v-model="userForm.loginName"></el-input>
+      <el-form :model="userForm" label-width="100px">
+        <el-form-item label="Book Name" prop="bookName">
+          <el-input v-model="userForm.bookName"></el-input>
         </el-form-item>
-        <el-form-item label="User Name" prop="userName">
-          <el-input v-model="userForm.userName"></el-input>
+        <el-form-item label="Date" prop="date">
+          <el-input v-model="userForm.date"></el-input>
         </el-form-item>
-        <el-form-item label="Password" prop="password">
-          <el-input v-model="userForm.password" show-password></el-input>
+        <el-form-item label="Type" prop="type">
+          <el-input v-model="userForm.type" show-password></el-input>
         </el-form-item>       
-        <el-form-item label="Email" prop="email">
-          <el-input v-model="userForm.email"></el-input>
-        </el-form-item>
       </el-form>
       <!--底部按钮区域-->
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="addUser">Confirm</el-button>
+        <el-button type="primary" @click="addBook">Confirm</el-button>
       </span>
     </el-dialog>
     <!--修改用户的对话框-->
-    <el-dialog title="Edit User Info" :visible.sync="editDialogVisible" width="30%">
+    <el-dialog title="Edit Book Info" :visible.sync="editDialogVisible" width="30%">
       <!--内容主体区域-->
-      <el-form :model="editForm" label-width="100px">
-        <el-form-item label="User Name" prop="userName">
-          <el-input v-model="editForm.userName"></el-input>
+      <el-form :model="editForm" label-width="70px">
+        <el-form-item label="Book Name" prop="bookName">
+          <el-input v-model="editForm.bookName"></el-input>
         </el-form-item>
-        <el-form-item label="Email" prop="email">
-          <el-input v-model="editForm.email"></el-input>
+        <el-form-item label="Date" prop="date">
+          <el-input v-model="editForm.date"></el-input>
         </el-form-item>
-        <el-form-item label="Password" prop="password">
-          <el-input v-model="editForm.password"></el-input>
+        <el-form-item label="Type" prop="type">
+          <el-input v-model="editForm.type"></el-input>
         </el-form-item>
       </el-form>
       <!--底部按钮区域-->
       <span slot="footer" class="dialog-footer">
         <el-button @click="editDialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="editUser">Confirm</el-button>
+        <el-button type="primary" @click="editBook">Confirm</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { userList, userAdd, userUpdate, userDelete, userBatchDelete} from "@/api/user";
+import { bookList, bookAdd, bookUpdate, bookDelete, userBatchDelete} from "@/api/book";
 export default {
   data() {
     return {
@@ -149,22 +146,19 @@ export default {
       addDialogVisible: false, // 控制添加用户对话框是否显示
       userForm: {
         //用户
-        loginName: "",
-        userName: "",
-        password: "",
-        sex: "",
-        email: "",
-        address: "",
+        bookName: "",
+        date: "",
+        type: "",
+        // sex: "",
+        // email: "",
+        //address: "",
       },
       editDialogVisible: false, // 控制修改用户信息对话框是否显示
+      
       editForm: {
-        //id: "",
-        loginName: "",
-        userName: "",
-        password: "",
-        //sex: "",
-        email: "",
-        //address: "",
+        bookName: "",
+        date: "",
+        type: "",
       },
       multipleSelection: [],
       ids: [],
@@ -172,15 +166,15 @@ export default {
   },
   created() {
     // 生命周期函数
-    this.getUserList();
+    this.getbookList();
   },
   methods: {
-    getUserList() {
-      userList(this.queryInfo)
+    getbookList() {
+      bookList(this.queryInfo)
         .then((res) => {
           if (res.data.code === "200") {
             //用户列表
-            this.userList = res.data.data;
+            this.bookList = res.data.data;
             this.total = res.data.data.total;
             console.log(res.data.data);
             //console.log(res.data.total);
@@ -197,28 +191,28 @@ export default {
       // console.log(newSize)
       this.queryInfo.pageSize = newSize;
       // 重新发起请求用户列表
-      this.getUserList();
+      this.getbookList();
     },
     // 监听 当前页码值 改变的事件
     handleCurrentChange(newPage) {
       // console.log(newPage)
       this.queryInfo.pageNo = newPage;
       // 重新发起请求用户列表
-      this.getUserList();
+      this.getbookList();
     },
     //添加用户
-    addUser() {
-      userAdd(this.userForm)
+    addBook() {
+      bookAdd(this.userForm)
         .then((res) => {
           if (res.data.code === "200") {
             this.addDialogVisible = false;
-            this.getUserList();
+            this.getbookList();
             this.$message({
               message: "Success",
               type: "success",
             });
           } else {
-            this.$message.error("User Existed");
+            this.$message.error("Book Existed");
           }
         })
         .catch((err) => {
@@ -240,12 +234,12 @@ export default {
       this.editForm = userinfo;
     },
     //修改用户
-    editUser() {
-      userUpdate(this.editForm)
+    editBook() {
+      bookUpdate(this.editForm)
         .then((res) => {
           if (res.data.code === "200") {
             this.editDialogVisible = false;
-            this.getUserList();
+            this.getbookList();
             this.$message({
               message: "Success",
               type: "success",
@@ -260,7 +254,7 @@ export default {
         });
     },
     // 根据ID删除对应的用户信息
-    async removeUserById(id) {
+    async removebookById(id) {
       // 弹框 询问用户是否删除
       const confirmResult = await this.$confirm(
         "Confirm?",
@@ -271,15 +265,13 @@ export default {
           type: "warning",
         }
       ).catch((err) => err);
-      // 如果用户确认删除，则返回值为字符串 confirm
-      // 如果用户取消删除，则返回值为字符串 cancel
-      // console.log(confirmResult)
+
       if (confirmResult == "confirm") {
         //删除用户
-        userDelete(id)
+        bookDelete(id)
           .then((res) => {
             if (res.data.code === "200") {
-              this.getUserList();
+              this.getbookList();
               this.$message({
                 message: "Success",
                 type: "success",
@@ -327,7 +319,7 @@ export default {
                 message: "Success",
                 type: "success",
               });
-              this.getUserList();
+              this.getbookList();
             } else {
               this.$message.error("Failed");
             }

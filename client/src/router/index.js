@@ -3,19 +3,22 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 //导入登录页面组件
 import Login from '@/views/login.vue'
-import Home from '@/views/home.vue'
+import Home from '@/views/Home.vue'
+import Register from "@/views/register";
+//import Book from "@/views/book.vue";
 
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
+  mode: "history",
   routes: [
-    {
-      path: '/',
-      name: 'Default',
-      redirect: '/home',
-      component: Home
-    },
+     {
+       path: '/',
+       name: 'Default',
+       redirect: '/login',
+       component: Home,
+     },
     {
        // home页面并不需要被访问，只是作为其它组件的父组件
       path: '/home',
@@ -41,6 +44,14 @@ export default new Router({
           meta:{
             requireAuth:true
           }
+        },
+        {
+          path:'/book',
+          name:'Book',
+          component:()=>import('@/views/book/index'),
+          meta:{
+            requireAuth:true
+          }
         }
       ]
     },
@@ -49,6 +60,37 @@ export default new Router({
       path:'/login',
       name: 'Login',
       component: Login
-    }
+    },
+    {
+      path:'/register',
+      name: 'Register',
+      component: Register
+    },
+    // {
+    //   path:'/index',
+    //   name:'Index',
+    //   component:() => import('@/views/home/index'),
+    //   meta:{
+    //     requireAuth:true
+    //   }
+    // },
+
+    {
+      path:'/user',
+      name:'User',
+      component:()=>import('@/views/user/index'),
+      meta:{
+        requireAuth:true
+      }
+    },
+
+
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  next()
+})
+
+
+export default router

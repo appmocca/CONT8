@@ -1,6 +1,6 @@
 <template>
   <body id="login-page">
-    <el-form class="login-container" label-position="left" label-width="0px">
+    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-container" label-position="left" label-width="0px">
       <h3 class="login_title">Log in</h3>
       <el-form-item>
         <el-input
@@ -26,6 +26,11 @@
           >Login</el-button
         >
       </el-form-item>
+      <el-button
+          type="primary"
+          style="width: 100%; border: none"
+          @click="register"
+          >Register</el-button>
     </el-form>
   </body>
 </template>
@@ -35,15 +40,47 @@ import { userLogin } from "@/api/user";
 export default {
   name: "Login",
   data() {
+    const validateUsername = (rule, value, callback) => {
+      if (!validUsername(value)) {
+        callback(new Error('please enter a valid username'))
+      } else {
+        callback()
+      }
+    }
+    const validatePassword = (rule, value, callback) => {
+      if (value.length < 6) {
+        callback(new Error('please enter a valid password, not less than 6 characters'))
+      } else {
+        callback()
+      }
+    }
     return {
       loginForm: {
-        loginName: "",
-        password: "",
+        username: "zhangsan",
+        password: "123456"
       },
-      responseResult: [],
-    };
+      rule: {
+        username: [
+          {required: true, message: 'please enter your username', trigger: 'blur' },
+          { validator: validateUsername, trigger: 'blur' }
+        ],
+        password: [
+          {required: true, message: 'please enter your password', trigger: 'blur' },
+          { validator: validatePassword, trigger: 'blur' }]
+      },
+      passwordType: 'password',
+      capsTooltip: false,
+      loading: false,
+      showDialog: false,
+      redirect: undefined,
+      otherQuery: {}
+    }
   },
+
   methods: {
+    register() {
+      this.$router.push({path: '/register'})
+    },
     login() {
       var _this = this;
       userLogin({
@@ -51,22 +88,19 @@ export default {
         password: this.loginForm.password,
       }).then((resp) => {
         let code=resp.data.code;
-        if(code===200){
-          let data=resp.data.data;
-          let token=data.token;
-          let user=data.user;
-          //存储token
-          _this.$store.commit('SET_TOKENN', token);
-          //存储user，优雅一点的做法是token和user分开获取
-          _this.$store.commit('SET_USER', user);
-          console.log(_this.$store.state.token);
+        if(code==="200"){
+          console.log(resp.data.code)
           var path = this.$route.query.redirect
-          this.$router.replace({path: path === '/' || path === undefined ? '/' : path})
-        }
+          this.$router.push({path: '/index'})
+        }else{
+          alert(resp.data.msg);
+          }
       });
     },
   },
 };
+
+
 </script>
 
 <style scoped>
