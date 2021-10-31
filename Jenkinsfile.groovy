@@ -17,20 +17,20 @@ pipeline {
 
         stage('Code compile'){
            steps {
-             sh 'npm --version'
+             sh 'echo "Hello World!"'
            }
         }
 
         stage('Build docker'){
            steps {
-                sh 'npm --version'
+                sh 'echo "Hello World!"'
                 }
            } 
         
 
         stage('Docker implement'){
            steps {
-              sh 'npm --version'
+              sh 'echo "Hello World!"'
             }
         }
     }
