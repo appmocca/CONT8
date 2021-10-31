@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Pulling code from github'){
             steps {
-             sh "git clone ${git_address}"
+             sh "git pull ${git_address}"
             }
         }
 
