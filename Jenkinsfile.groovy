@@ -28,7 +28,7 @@ pipeline {
            } 
         
 
-        stage('Docker implement'){
+        stage('Docker deployment'){
            steps {
               sh 'echo "Hello World!"'
             }
