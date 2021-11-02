@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('拉取代码'){
             steps {
-             sh 'git pull https://github.com/appmocca/CONT8.git -b max'
+             sh 'git pull https://github.com/appmocca/CONT8.git'
             // 拉取代码、
             }
         }
