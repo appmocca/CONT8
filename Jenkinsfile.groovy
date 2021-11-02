@@ -54,15 +54,15 @@ pipeline {
            } 
         }
 
-        // stage('部署到Docker'){
-        //    steps {
-        //       sh """
-        //       REPOSITORY=${image_name}
-        //       docker rm -f tomcat-java-demo |true
-        //       # 8080 java-demo
-        //       # 80 nginx vue-demo
-        //       docker container run -d --name java-spring-boot-node -p 8081:80 -p 88:8080 ${image_name}
-        //       """
-        //     }
-        // }
+        stage('部署到Docker'){
+           steps {
+              sh """
+              REPOSITORY=${image_name}
+              docker rm -f tomcat-java-demo |true
+              # 8080 java-demo
+              # 80 nginx vue-demo
+              docker container run -d --name java-spring-boot-node -p 8081:80 -p 88:8080 ${image_name}
+              """
+            }
+        }
     }
